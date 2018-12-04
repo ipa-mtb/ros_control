@@ -37,16 +37,13 @@
 #include <string>
 #include <utility>
 #include <vector>
-
-// Boost
-#include <boost/foreach.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 // ROS
 #include <ros/console.h>
 
 // pluginlib
-#include <pluginlib/class_loader.h>
+#include <pluginlib/class_loader.hpp>
 
 // ros_control
 #include <hardware_interface/actuator_state_interface.h>
@@ -145,10 +142,16 @@ struct ForwardTransmissionInterfaces
   JointToActuatorEffortInterface   jnt_to_act_eff_cmd;
 };
 
+struct InverseTransmissionInterfaces
+{
+  JointToActuatorStateInterface    jnt_to_act_state;
+  ActuatorToJointPositionInterface act_to_jnt_pos_cmd;
+  ActuatorToJointVelocityInterface act_to_jnt_vel_cmd;
+  ActuatorToJointEffortInterface   act_to_jnt_eff_cmd;
+};
+
 struct TransmissionLoaderData
 {
-  typedef boost::shared_ptr<Transmission> TransmissionPtr;
-
   TransmissionLoaderData()
     : robot_hw(0),
       robot_transmissions(0)
@@ -159,13 +162,13 @@ struct TransmissionLoaderData
   JointInterfaces               joint_interfaces;
   RawJointDataMap               raw_joint_data_map;
   ForwardTransmissionInterfaces transmission_interfaces;
-  std::vector<TransmissionPtr>  transmission_data;
+  InverseTransmissionInterfaces inverse_transmission_interfaces;
+  std::vector<TransmissionSharedPtr>  transmission_data;
 };
 
 class RequisiteProvider // TODO: There must be a more descriptive name for this class!
 {
 public:
-  typedef TransmissionLoaderData::TransmissionPtr TransmissionPtr;
 
   virtual ~RequisiteProvider() {}
 
@@ -190,16 +193,16 @@ public:
 
   bool loadTransmissionMaps(const TransmissionInfo& transmission_info,
                             TransmissionLoaderData& loader_data,
-                            TransmissionPtr         transmission);
+                            TransmissionSharedPtr   transmission);
 protected:
   struct TransmissionHandleData
   {
-    std::string     name;
-    ActuatorData    act_state_data;
-    ActuatorData    act_cmd_data;
-    JointData       jnt_state_data;
-    JointData       jnt_cmd_data;
-    TransmissionPtr transmission;
+    std::string           name;
+    ActuatorData          act_state_data;
+    ActuatorData          act_cmd_data;
+    JointData             jnt_state_data;
+    JointData             jnt_cmd_data;
+    TransmissionSharedPtr transmission;
   };
 
   virtual bool getJointStateData(const TransmissionInfo& transmission_info,
@@ -262,7 +265,7 @@ protected:
     }
 
     // Get handles to all required resource
-    BOOST_FOREACH(const ActuatorInfo& info, actuators_info)
+    for (const ActuatorInfo& info : actuators_info)
     {
       try
       {
@@ -374,6 +377,16 @@ public:
   bool load(const std::string& urdf);
 
   /**
+   * \brief Load all transmissions contained in a vector of \c TransmissionInfo instances.
+   *
+   * This method adds new joint and transmission interfaces to the \c RobotHW and \c RobotTransmissions instances
+   * passed in the constructor, respectively.
+   * \param transmission_info_vec Vector of \c TransmissionInfo instances.
+   * \return True if successful.
+   */
+  bool load(const std::vector<TransmissionInfo>& transmission_info_vec);
+
+  /**
    * \brief Load a single transmission.
    *
    * This method adds new joint and transmission interfaces to the \c RobotHW and \c RobotTransmissions instances
@@ -387,13 +400,11 @@ public:
 
 private:
   typedef pluginlib::ClassLoader<TransmissionLoader>      TransmissionClassLoader;
-  typedef boost::shared_ptr<TransmissionClassLoader>      TransmissionClassLoaderPtr;
+  typedef std::shared_ptr<TransmissionClassLoader>      TransmissionClassLoaderPtr;
   typedef pluginlib::ClassLoader<RequisiteProvider>       RequisiteProviderClassLoader;
-  typedef boost::shared_ptr<RequisiteProviderClassLoader> RequisiteProviderClassLoaderPtr;
+  typedef std::shared_ptr<RequisiteProviderClassLoader> RequisiteProviderClassLoaderPtr;
 
-  typedef boost::shared_ptr<Transmission>                 TransmissionPtr;
-  typedef boost::shared_ptr<TransmissionLoader>           TransmissionLoaderPtr;
-  typedef boost::shared_ptr<RequisiteProvider>            RequisiteProviderPtr;
+  typedef std::shared_ptr<RequisiteProvider>            RequisiteProviderPtr;
 
   TransmissionClassLoaderPtr transmission_class_loader_;
   RequisiteProviderClassLoaderPtr req_provider_loader_;

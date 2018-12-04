@@ -32,7 +32,7 @@
 
 #include <controller_interface/controller.h>
 #include <hardware_interface/hardware_interface.h>
-#include <pluginlib/class_list_macros.h>
+#include <pluginlib/class_list_macros.hpp>
 
 namespace controller_manager_tests
 {
@@ -51,14 +51,13 @@ class MyDummyController : public controller_interface::Controller<MyDummyInterfa
 public:
   MyDummyController() { }
 
-  bool init(MyDummyInterface* hw, ros::NodeHandle &n) { return true; }
-  void starting(const ros::Time& time) { }
-  void update(const ros::Time& time, const ros::Duration& period) { }
-  void stopping(const ros::Time& time) { }
+  using controller_interface::Controller<MyDummyInterface>::init;
+  bool init(MyDummyInterface* /*hw*/, ros::NodeHandle& /*n*/) { return true; }
+  void starting(const ros::Time& /*time*/) { }
+  void update(const ros::Time& /*time*/, const ros::Duration& /*period*/) { }
+  void stopping(const ros::Time& /*time*/) { }
 };
 
 }
 
 #endif
-
-

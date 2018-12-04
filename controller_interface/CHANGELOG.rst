@@ -2,6 +2,88 @@
 Changelog for package controller_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+
+0.15.0 (2018-05-28)
+-------------------
+* boost::shared_ptr -> std::shared_ptr
+* Introduce shared_ptr typedefs
+* remove forward declaration of InterfaceResources
+* Contributors: Bence Magyar, Mathias Lüdtke
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+
+0.14.0 (2018-03-26)
+-------------------
+* Switch MultiInterfaceController to use variadic templates.
+* Use public virtual for Controller inheritance.
+* Contributors: Mike Purvis
+
+0.13.0 (2017-12-23)
+-------------------
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+
+0.11.4 (2017-02-14)
+-------------------
+
+0.11.3 (2016-12-07)
+-------------------
+
+0.11.2 (2016-11-28)
+-------------------
+* Remove boost from depends declaration to fix cmake warning
+* sort dependencies
+* Add Enrique and Bence to maintainer list
+* Clean up export leftovers from rosbuild
+* Convert to format2, fix dependency in cmake
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+* Fix the example in the comments in multi_interface_controller.h.
+* Contributors: Miguel Prada
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+
+0.10.0 (2015-11-20)
+-------------------
+* Add MultiInterfaceController.
+  - Subclass of ControllerBase which allows to claim resources from up to four
+  different hardware interfaces.
+  Requested hardware interfaces are required by default, but can be made optional
+  through a constructor flag.
+* Remove getHardwareInterfaceType() pure virtual method from ControllerBase
+  class.
+  - C++ API break.
+  - Controller class still preserves the method, albeit protected and non-virtual.
+* Modify controller interfaces to allow for controllers that claim resources
+  from more than one hardware interface.
+  - C++ API break.
+* Address -Wunused-parameter warnings
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.9.3 (2015-05-05)
+------------------
+
+0.9.2 (2015-05-04)
+------------------
+
 0.9.1 (2014-11-03)
 ------------------
 * Update package maintainers

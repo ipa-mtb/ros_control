@@ -27,15 +27,12 @@
 
 /// \author Daniel Pinyol
 
-#include <boost/scoped_ptr.hpp>
-#include <pluginlib/class_loader.h>
+#include <pluginlib/class_loader.hpp>
 #include <transmission_interface/simple_transmission.h>
 #include <transmission_interface/transmission_loader.h>
 #include "read_file.h"
 
 using namespace transmission_interface;
-typedef TransmissionLoader::TransmissionPtr TransmissionPtr;
-
 
 struct TransmissionPluginLoader
 {
@@ -44,17 +41,17 @@ struct TransmissionPluginLoader
   {
   }
 
-  boost::shared_ptr<TransmissionLoader> create(const std::string& type)
+  TransmissionLoaderSharedPtr create(const std::string& type)
   {
 
     try
     {
-      return class_loader_.createInstance(type);
+      return class_loader_.createUniqueInstance(type);
     }
-    catch(...) {return boost::shared_ptr<TransmissionLoader>();}
+    catch(...) {return TransmissionLoaderSharedPtr();}
   }
 
 private:
   //must keep it alive because instance destroyers need it
-  pluginlib::ClassLoader<TransmissionLoader>  class_loader_;
+  pluginlib::ClassLoader<TransmissionLoader> class_loader_;
 };

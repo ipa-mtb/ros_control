@@ -29,8 +29,10 @@
 #ifndef HARDWARE_INTERFACE_CONTROLLER_INFO_H
 #define HARDWARE_INTERFACE_CONTROLLER_INFO_H
 
-#include <set>
 #include <string>
+#include <vector>
+
+#include <hardware_interface/interface_resources.h>
 
 namespace hardware_interface
 {
@@ -42,8 +44,14 @@ namespace hardware_interface
  */
 struct ControllerInfo
 {
-  std::string name, type, hardware_interface;
-  std::set<std::string> resources;
+  /** Controller name. */
+  std::string name;
+
+  /** Controller type. */
+  std::string type;
+
+  /** Claimed resources, grouped by the hardware interface they belong to. */
+  std::vector<InterfaceResources> claimed_resources;
 };
 
 }

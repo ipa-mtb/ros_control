@@ -28,9 +28,9 @@
 #ifndef CONRTOLLER_MANAGER_CONTROLLER_LOADER_H
 #define CONRTOLLER_MANAGER_CONTROLLER_LOADER_H
 
-#include <pluginlib/class_loader.h>
+#include <pluginlib/class_loader.hpp>
 #include <controller_manager/controller_loader_interface.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace controller_manager
 {
@@ -56,9 +56,9 @@ public:
     reload();
   }
 
-  boost::shared_ptr<controller_interface::ControllerBase> createInstance(const std::string& lookup_name)
+  controller_interface::ControllerBaseSharedPtr createInstance(const std::string& lookup_name)
   {
-    return controller_loader_->createInstance(lookup_name);
+    return controller_loader_->createUniqueInstance(lookup_name);
   }
 
   std::vector<std::string> getDeclaredClasses()
@@ -74,7 +74,7 @@ public:
 private:
   std::string package_;
   std::string base_class_;
-  boost::shared_ptr<pluginlib::ClassLoader<T> > controller_loader_;
+  std::unique_ptr<pluginlib::ClassLoader<T> > controller_loader_;
 };
 
 }

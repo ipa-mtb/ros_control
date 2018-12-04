@@ -31,7 +31,7 @@
 
 #include <controller_interface/controller.h>
 #include <hardware_interface/joint_command_interface.h>
-#include <pluginlib/class_list_macros.h>
+#include <pluginlib/class_list_macros.hpp>
 
 
 namespace controller_manager_tests
@@ -43,10 +43,11 @@ class EffortTestController: public controller_interface::Controller<hardware_int
 public:
   EffortTestController(){}
 
-  bool init(hardware_interface::EffortJointInterface* hw, ros::NodeHandle &n);
-  void starting(const ros::Time& time);
-  void update(const ros::Time& time, const ros::Duration& period);
-  void stopping(const ros::Time& time);
+  using controller_interface::Controller<hardware_interface::EffortJointInterface>::init;
+  bool init(hardware_interface::EffortJointInterface* hw, ros::NodeHandle& /*n*/);
+  void starting(const ros::Time& /*time*/);
+  void update(const ros::Time& /*time*/, const ros::Duration& /*period*/);
+  void stopping(const ros::Time& /*time*/);
 
 private:
   std::vector<hardware_interface::JointHandle> joint_effort_commands_;

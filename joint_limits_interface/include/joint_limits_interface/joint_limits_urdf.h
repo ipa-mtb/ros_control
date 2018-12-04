@@ -31,11 +31,8 @@
 #define JOINT_LIMITS_INTERFACE_JOINT_LIMITS_URDF_H
 
 #include <ros/common.h>
-#if ROS_VERSION_MINIMUM(1, 9, 0) // TODO: Deprecate this conditional when Fuerte support is EOL'd
-  #include <urdf_model/joint.h> // Fuerte.
-#else
-  #include <urdf_interface/joint.h> // Groovy and later
-#endif
+#include <urdf_model/joint.h>
+#include <urdf/urdfdom_compatibility.h>
 #include <joint_limits_interface/joint_limits.h>
 
 namespace joint_limits_interface
@@ -48,7 +45,7 @@ namespace joint_limits_interface
  * values. Values in \e limits not present in \e urdf_joint remain unchanged.
  * \return True if \e urdf_joint has a valid limits specification, false otherwise.
  */
-inline bool getJointLimits(boost::shared_ptr<const urdf::Joint> urdf_joint, JointLimits& limits)
+inline bool getJointLimits(urdf::JointConstSharedPtr urdf_joint, JointLimits& limits)
 {
   if (!urdf_joint || !urdf_joint->limits)
   {
@@ -84,7 +81,7 @@ inline bool getJointLimits(boost::shared_ptr<const urdf::Joint> urdf_joint, Join
  * \param[out] soft_limits Where URDF soft joint limit data gets written into.
  * \return True if \e urdf_joint has a valid soft limits specification, false otherwise.
  */
-inline bool getSoftJointLimits(boost::shared_ptr<const urdf::Joint> urdf_joint, SoftJointLimits& soft_limits)
+inline bool getSoftJointLimits(urdf::JointConstSharedPtr urdf_joint, SoftJointLimits& soft_limits)
 {
   if (!urdf_joint || !urdf_joint->safety)
   {

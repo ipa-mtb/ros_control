@@ -1,8 +1,10 @@
-<package>
+<package format="2">
   <name>controller_manager</name>
-  <version>0.9.1</version>
+  <version>0.15.1</version>
   <description>The controller manager.</description>
-  <maintainer email="adolfo.rodriguez@pal-robotics.com">Adolfo Rodriguez Tsouroukdissian</maintainer>
+  <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
+  <maintainer email="enrique.fernandez.perdomo@gmail.com">Enrique Fernandez</maintainer>
+  <maintainer email="mathias.luedtke@ipa.fraunhofer.de">Mathias Lüdtke</maintainer>
 
   <license>BSD</license>
 
@@ -11,21 +13,13 @@
   <url type="repository">https://github.com/ros-controls/ros_control</url>
 
   <author>Wim Meeussen</author>
+  <author>Mathias Lüdtke</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>controller_interface</build_depend> 
-  <build_depend>controller_manager_msgs</build_depend> 
-  <build_depend>hardware_interface</build_depend> 
-  <build_depend>realtime_tools</build_depend> 
-  <build_depend>pluginlib</build_depend> 
-  <run_depend>controller_interface</run_depend> 
-  <run_depend>controller_manager_msgs</run_depend> 
-  <run_depend>hardware_interface</run_depend> 
-  <run_depend>realtime_tools</run_depend> 
-  <run_depend>pluginlib</run_depend> 
-
-  <export>
-    <cpp lflags="-L${prefix}/lib -lcontroller_manager" cflags="-I${prefix}/include"/>
-  </export>
+  <depend>controller_interface</depend>
+  <depend>controller_manager_msgs</depend>
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <test_depend>rostest</test_depend>
 </package>

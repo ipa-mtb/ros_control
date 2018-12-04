@@ -33,6 +33,8 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <memory>
+
 
 namespace transmission_interface
 {
@@ -159,6 +161,8 @@ public:
   /** \return Number of joints managed by transmission, ie. the dimension of the joint space. */
   virtual std::size_t numJoints()    const = 0;
 };
+
+typedef std::shared_ptr<Transmission> TransmissionSharedPtr;
 
 } // transmission_interface
 

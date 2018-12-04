@@ -2,6 +2,75 @@
 Changelog for package rqt_controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+
+0.15.0 (2018-05-28)
+-------------------
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* Fix catkin_lint errors and warnings
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+
+0.14.0 (2018-03-26)
+-------------------
+
+0.13.0 (2017-12-23)
+-------------------
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+
+0.11.4 (2017-02-14)
+-------------------
+
+0.11.3 (2016-12-07)
+-------------------
+
+0.11.2 (2016-11-28)
+-------------------
+* Add Enrique and Bence to maintainer list
+* Convert to format2, fix dependency in cmake
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+* Qt5 migration
+* Contributors: Bence Magyar
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+
+0.10.0 (2015-11-20)
+-------------------
+* Allow running as standalone application
+* Multi-interface controllers, UI revamp
+  - Make the rqt_controller_manager aware of multi-interface controllers.
+  - Reduce the amount of screen real-estate used by the plugin.
+  - Make main view read-only.
+  - Show uninitialized controllers (fetched from parameter server) in the same
+  list as stopped and running controllers.
+  - Make less assumptions when finding running controller managers. Use
+  existing helpers on controller_mamager_msgs.utils Python module.
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.9.3 (2015-05-05)
+------------------
+
+0.9.2 (2015-05-04)
+------------------
+
 0.9.1 (2014-11-03)
 ------------------
 

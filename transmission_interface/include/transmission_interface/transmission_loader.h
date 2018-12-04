@@ -36,10 +36,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-// Boost
-#include <boost/foreach.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 // TinyXML
 #include <tinyxml.h>
@@ -67,8 +64,7 @@ public:
 
   virtual ~TransmissionLoader() {}
 
-  typedef boost::shared_ptr<Transmission> TransmissionPtr;
-  virtual TransmissionPtr load(const TransmissionInfo& transmission_info) = 0;
+  virtual TransmissionSharedPtr load(const TransmissionInfo& transmission_info) = 0;
 
 protected:
   enum ParseStatus
@@ -143,6 +139,8 @@ protected:
                                   bool                required,
                                   std::string&        role);
 };
+
+typedef std::shared_ptr<TransmissionLoader> TransmissionLoaderSharedPtr;
 
 } // namespace
 

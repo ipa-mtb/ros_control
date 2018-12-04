@@ -38,7 +38,7 @@ namespace transmission_interface
 
 bool RequisiteProvider::loadTransmissionMaps(const TransmissionInfo& transmission_info,
                                              TransmissionLoaderData& loader_data,
-                                             TransmissionPtr         transmission)
+                                             TransmissionSharedPtr   transmission)
 {
   TransmissionHandleData handle_data;
   handle_data.name         = transmission_info.name_;
@@ -118,7 +118,12 @@ bool TransmissionInterfaceLoader::load(const std::string& urdf)
     return false;
   }
 
-  BOOST_FOREACH(const TransmissionInfo& info, infos)
+  return load(infos);
+}
+
+bool TransmissionInterfaceLoader::load(const std::vector<TransmissionInfo>& transmission_info_vec)
+{
+  for (const TransmissionInfo& info : transmission_info_vec)
   {
     if (!load(info)) {return false;}
   }
@@ -128,10 +133,10 @@ bool TransmissionInterfaceLoader::load(const std::string& urdf)
 bool TransmissionInterfaceLoader::load(const TransmissionInfo& transmission_info)
 {
   // Create transmission instance
-  TransmissionPtr transmission;
+  TransmissionSharedPtr transmission;
   try
   {
-    TransmissionLoaderPtr transmission_loader = transmission_class_loader_->createInstance(transmission_info.type_);
+    TransmissionLoaderSharedPtr transmission_loader = transmission_class_loader_->createUniqueInstance(transmission_info.type_);
     transmission = transmission_loader->load(transmission_info);
     if (!transmission) {return false;}
   }
@@ -145,7 +150,7 @@ bool TransmissionInterfaceLoader::load(const TransmissionInfo& transmission_info
   // We currently only deal with transmissions specifying a single hardware interface in the joints
   assert(!transmission_info.joints_.empty() && !transmission_info.joints_.front().hardware_interfaces_.empty());
   const std::vector<std::string>& hw_ifaces_ref = transmission_info.joints_.front().hardware_interfaces_; // First joint
-  BOOST_FOREACH(const JointInfo& jnt_info, transmission_info.joints_)
+  for (const JointInfo& jnt_info : transmission_info.joints_)
   {
     // Error out if at least one joint has a different set of hardware interfaces
     if (hw_ifaces_ref.size() != jnt_info.hardware_interfaces_.size() ||
@@ -161,12 +166,12 @@ bool TransmissionInterfaceLoader::load(const TransmissionInfo& transmission_info
 
   // Load transmission for all specified hardware interfaces
   bool has_at_least_one_hw_iface = false;
-  BOOST_FOREACH(const std::string& hw_iface, hw_ifaces_ref)
+  for (const std::string& hw_iface : hw_ifaces_ref)
   {
     RequisiteProviderPtr req_provider;
     try
     {
-      req_provider = req_provider_loader_->createInstance(hw_iface);
+      req_provider = req_provider_loader_->createUniqueInstance(hw_iface);
       if (!req_provider) {continue;}
     }
     catch(pluginlib::LibraryLoadException &ex)

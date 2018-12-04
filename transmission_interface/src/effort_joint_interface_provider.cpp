@@ -27,7 +27,7 @@
 
 
 // Pluginlib
-#include <pluginlib/class_list_macros.h>
+#include <pluginlib/class_list_macros.hpp>
 
 // ros_control
 #include <transmission_interface/effort_joint_interface_provider.h>
@@ -55,7 +55,7 @@ bool EffortJointInterfaceProvider::updateJointInterfaces(const TransmissionInfo&
   EffortJointInterface& interface = *(robot_hw->get<EffortJointInterface>());
 
   // Register joints on the hardware interface
-  BOOST_FOREACH(const JointInfo& joint_info, transmission_info.joints_)
+  for (const JointInfo& joint_info : transmission_info.joints_)
   {
     const std::string& name = joint_info.name_;
 

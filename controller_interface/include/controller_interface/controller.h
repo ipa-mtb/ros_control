@@ -49,7 +49,7 @@ namespace controller_interface
  * control.
  */
 template <class T>
-class Controller: public ControllerBase
+class Controller: public virtual ControllerBase
 {
 public:
   Controller()  {state_ = CONSTRUCTED;}
@@ -68,7 +68,7 @@ public:
    * \returns True if initialization was successful and the controller
    * is ready to be started.
    */
-  virtual bool init(T* hw, ros::NodeHandle &controller_nh) {return true;};
+  virtual bool init(T* /*hw*/, ros::NodeHandle& /*controller_nh*/) {return true;};
 
   /** \brief The init function is called to initialize the controller from a
    * non-realtime thread with a pointer to the hardware interface, itself,
@@ -85,7 +85,7 @@ public:
    * \returns True if initialization was successful and the controller
    * is ready to be started.
    */
-  virtual bool init(T* hw, ros::NodeHandle& root_nh, ros::NodeHandle &controller_nh) {return true;};
+  virtual bool init(T* /*hw*/, ros::NodeHandle& /*root_nh*/, ros::NodeHandle& /*controller_nh*/) {return true;};
 
 
 protected:
@@ -96,8 +96,9 @@ protected:
    *
    */
   virtual bool initRequest(hardware_interface::RobotHW* robot_hw,
-                           ros::NodeHandle& root_nh, ros::NodeHandle &controller_nh,
-                           std::set<std::string> &claimed_resources)
+                           ros::NodeHandle&             root_nh,
+                           ros::NodeHandle&             controller_nh,
+                           ClaimedResources&            claimed_resources)
   {
     // check if construction finished cleanly
     if (state_ != CONSTRUCTED){
@@ -122,7 +123,8 @@ protected:
       ROS_ERROR("Failed to initialize the controller");
       return false;
     }
-    claimed_resources = hw->getClaims();
+    hardware_interface::InterfaceResources iface_res(getHardwareInterfaceType(), hw->getClaims());
+    claimed_resources.assign(1, iface_res);
     hw->clearClaims();
 
     // success
@@ -130,7 +132,8 @@ protected:
     return true;
   }
 
-  virtual std::string getHardwareInterfaceType() const
+  /// Get the name of this controller's hardware interface type
+  std::string getHardwareInterfaceType() const
   {
     return hardware_interface::internal::demangledTypeName<T>();
   }

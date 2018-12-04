@@ -2,6 +2,113 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+* Updated for compatibility with Python2 or Python3
+* Initialize controller_manager node using init_node.
+* back to Python3 prints, add '-s to remaining places
+* pep8 styling
+* added quotes in python code too, also changed python prints to rosconsole
+* added quotes for controller name and controller type in warnings and errors
+* Contributors: Daniel Ingram, Jasper Güldenstein, Stefan Profanter, Gennaro Raiola, Bence Magyar
+
+0.15.0 (2018-05-28)
+-------------------
+* boost::shared_ptr -> std::shared_ptr
+* Introduce shared_ptr typedefs
+* Add controller_group script that allows switching groups easily
+* Contributors: Bence Magyar, Enrique Fernández Perdomo, Yong Li
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* Fix catkin_lint errors and warnings
+* Remove unused imports, comment and executable flag
+* Remove realtime_tools dependency
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+* Fix controller_manager_interface and add unit tests.
+* Contributors: Yong Li
+
+0.14.0 (2018-03-26)
+-------------------
+* migrate classloader headers
+* refactored controller_manager unspawner
+* fix controller_manager list: migrated to new ControllerState with claimed_resources
+* remove debug prints from controller_manager script
+* Contributors: Mathias Lüdtke
+
+0.13.0 (2017-12-23)
+-------------------
+* Several spawner-related fixes:
+* Remove shutdown_timeout & add deprecation note
+* Remove roslib import
+* Run wait_for_service on object instead of the hardcoded string version
+* Remove wait_for_service and rephrase warning after exception
+* Remove sleep(1) as it causes more problems than what it solves
+* Contributors: Bence Magyar
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+* Fix misspelling revise message
+* Contributors: Dave Coleman
+
+0.11.4 (2017-02-14)
+-------------------
+* controller_manager: drop unused inclusion of tinyxml.h
+* Contributors: Dmitry Rozhkov
+
+0.11.3 (2016-12-07)
+-------------------
+
+0.11.2 (2016-11-28)
+-------------------
+* to[to.size-1] to to.back()
+* Remove boost from depends declaration to fix cmake warning
+* Add Enrique and Bence to maintainer list
+* Clean up export leftovers from rosbuild
+* Convert to format2, fix dependency in cmake
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+
+0.10.0 (2015-11-20)
+-------------------
+* Fix doSwitch execution point
+  The doSwitch method needs to be executed in the update() method,  that is, in
+  the real-time path, which is where controller switching actually takes place.
+* Introduce prepareSwitch, replacement of canSwitch
+* Deprecate RobotHW::canSwitch
+* Multi-interface controllers
+  - C++ API break.
+  - Make controller_manager aware of controllers that claim resources from more
+  than one hardware interface.
+  - Update and extend the corresponding test suite.
+* Address -Wunused-parameter warnings
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Mathias Lüdtke
+
+0.9.3 (2015-05-05)
+------------------
+* controller_manager: Add missing rostest dep
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.9.2 (2015-05-04)
+------------------
+* Add HW interface switch feature
+* Contributors: Mathias Lüdtke
+
 0.9.1 (2014-11-03)
 ------------------
 * Update package maintainers

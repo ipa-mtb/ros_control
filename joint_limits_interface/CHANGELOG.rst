@@ -2,6 +2,77 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+
+0.15.0 (2018-05-28)
+-------------------
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* Fix catkin_lint errors and warnings
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+
+0.14.0 (2018-03-26)
+-------------------
+
+0.13.0 (2017-12-23)
+-------------------
+* Add method to populate SoftJointLimits from ROS parameter server. (`#292 <https://github.com/ros-controls/ros_control/issues/292>`_)
+* Contributors: Miguel Prada
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+* Throw error if EffortJointSaturationHandle is missing effort or velocity limits
+* Contributors: Bence Magyar, Dave Coleman
+
+0.11.4 (2017-02-14)
+-------------------
+
+0.11.3 (2016-12-07)
+-------------------
+* Add urdf compatibility header
+* Contributors: Bence Magyar
+
+0.11.2 (2016-11-28)
+-------------------
+* Add Enrique and Bence to maintainer list
+* Clean up export leftovers from rosbuild
+* Convert to format2, fix dependency in cmake
+* Replace boost::shared_ptr<urdf::XY> with urdf::XYConstSharedPtr
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+* Fix catkin_package
+  * Don't export local include dirs.
+  * Fix dependency on urdfdom (Thanks to Mathias Lüdtke).
+* Contributors: Jochen Sprickerhof
+
+0.10.0 (2015-11-20)
+-------------------
+
+0.9.3 (2015-05-05)
+------------------
+
+0.9.2 (2015-05-04)
+------------------
+* Reset functionality for stateful position joint limit handles
+* Contributors: Mathias Lüdtke
+
 0.9.1 (2014-11-03)
 ------------------
 

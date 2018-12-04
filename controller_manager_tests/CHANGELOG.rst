@@ -2,6 +2,86 @@
 Changelog for package controller_manager_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+* Added quotes for controller name and controller type in warnings and errors
+* Update expected text in tests to have '' around controller names
+* Contributors: Bence Magyar, Gennaro Raiola
+
+0.15.0 (2018-05-28)
+-------------------
+* Add controller_group script that allows switching groups easily
+* Contributors: Enrique Fernández Perdomo, Yong Li
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* pluginlib: .h -> .hpp
+* Fix catkin_lint errors and warnings
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+* Fix controller_manager_interface and add unit tests.
+* Contributors: Yong Li
+
+0.14.0 (2018-03-26)
+-------------------
+* Copyright blocks.
+* Tests for extensible controllers.
+* migrate to new class list macros header
+* add tests for controller_manager scripts and nodes
+* Contributors: Mathias Lüdtke, Mike Purvis
+
+0.13.0 (2017-12-23)
+-------------------
+* Drop includes from CMake library build.
+* Contributors: Mike Purvis
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+
+0.11.4 (2017-02-14)
+-------------------
+
+0.11.3 (2016-12-07)
+-------------------
+
+0.11.2 (2016-11-28)
+-------------------
+* Add Enrique and Bence to maintainer list
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+* Add missing test dependency on rosservice
+* Remove control_toolbox dependency. Fix thread linking error coming from removal of dependency.
+* Contributors: Bence Magyar
+
+0.10.0 (2015-11-20)
+-------------------
+* Cleaner test exit
+* Extend test suite
+  - Exercise much more of the controller_manager ROS API.
+  - Create multi-interface test controllers and exercise them in tests.
+* Address -Wunused-parameter warnings
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.9.3 (2015-05-05)
+------------------
+
+0.9.2 (2015-05-04)
+------------------
+
 0.9.1 (2014-11-03)
 ------------------
 * Update package maintainers

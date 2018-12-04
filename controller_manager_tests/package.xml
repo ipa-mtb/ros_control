@@ -1,8 +1,10 @@
 <package>
   <name>controller_manager_tests</name>
-  <version>0.9.1</version>
+  <version>0.15.1</version>
   <description>controller_manager_tests</description>
-  <maintainer email="adolfo.rodriguez@pal-robotics.com">Adolfo Rodriguez Tsouroukdissian</maintainer>
+  <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
+  <maintainer email="enrique.fernandez.perdomo@gmail.com">Enrique Fernandez</maintainer>
+  <maintainer email="mathias.luedtke@ipa.fraunhofer.de">Mathias Lüdtke</maintainer>
 
   <license>BSD</license>
 
@@ -11,17 +13,18 @@
   <url type="repository">https://github.com/ros-controls/ros_control</url>
 
   <author>Vijay Pradeep</author>
+  <author>Adolfo Rodriguez Tsouroukdissian</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>rostest</build_depend>
-  <build_depend>control_toolbox</build_depend>
   <build_depend>controller_manager</build_depend>
   <build_depend>controller_interface</build_depend>
-  <run_depend>rostest</run_depend>
-  <run_depend>control_toolbox</run_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>controller_interface</run_depend>
+  <test_depend>rostest</test_depend>
+  <test_depend>rosservice</test_depend>
+  <test_depend>rosbash</test_depend>
+  <test_depend>rosnode</test_depend>
 
   <export>
     <controller_interface plugin="${prefix}/test_controllers_plugin.xml"/>

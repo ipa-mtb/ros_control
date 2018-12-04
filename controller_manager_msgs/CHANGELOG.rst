@@ -2,6 +2,74 @@
 Changelog for package controller_manager_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.15.1 (2018-09-30)
+-------------------
+
+0.15.0 (2018-05-28)
+-------------------
+
+0.14.2 (2018-04-26)
+-------------------
+* Update maintainers
+* Contributors: Bence Magyar
+
+0.14.1 (2018-04-16)
+-------------------
+
+0.14.0 (2018-03-26)
+-------------------
+
+0.13.0 (2017-12-23)
+-------------------
+
+0.12.0 (2017-08-05)
+-------------------
+
+0.11.5 (2017-06-28)
+-------------------
+
+0.11.4 (2017-02-14)
+-------------------
+
+0.11.3 (2016-12-07)
+-------------------
+
+0.11.2 (2016-11-28)
+-------------------
+* Add Enrique and Bence to maintainer list
+* Clean up export leftovers from rosbuild
+* Convert to format2, fix dependency in cmake
+* Contributors: Bence Magyar
+
+0.11.1 (2016-08-18)
+-------------------
+
+0.11.0 (2016-05-23)
+-------------------
+
+0.10.1 (2016-04-23)
+-------------------
+
+0.10.0 (2015-11-20)
+-------------------
+* Add helper to query rosparam controller configs
+  There is no way to identify uninitialized controllers other than by inspecting
+  the ROS parameter server, and looking for the required controller config
+  structure, which is the existence of the <ctrl_name>/type parameter.
+* Multi-interface controllers
+  - Breaks ROS API and (internal) Python API.
+  - Modify and extend ROS message definitions to allow for controllers that
+  claim resources from more than one hardware interface.
+  - Modify Python helpers and update the corresponding test suite to take into
+  account above changes.
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.9.3 (2015-05-05)
+------------------
+
+0.9.2 (2015-05-04)
+------------------
+
 0.9.1 (2014-11-03)
 ------------------
 * Update package maintainers
